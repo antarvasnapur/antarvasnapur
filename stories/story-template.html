@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="hi" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- SEO: Replace these for each story -->
+  <title>{{STORY_TITLE}} — AntarVasna Pur</title>
+  <meta name="description" content="{{STORY_EXCERPT}}">
+  <link rel="canonical" href="https://antarvasnapur.in/stories/{{STORY_SLUG}}.html">
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="{{STORY_TITLE}} — AntarVasna Pur">
+  <meta property="og:description" content="{{STORY_EXCERPT}}">
+  <meta property="og:url" content="https://antarvasnapur.in/stories/{{STORY_SLUG}}.html">
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="AntarVasna Pur">
+  <meta property="article:published_time" content="{{STORY_DATE}}">
+  <meta property="article:section" content="{{STORY_CATEGORY}}">
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="{{STORY_TITLE}}">
+  <meta name="twitter:description" content="{{STORY_EXCERPT}}">
+
+  <link rel="stylesheet" href="/css/style.css">
+
+  <!-- Schema.org Article -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "headline": "{{STORY_TITLE}}",
+    "description": "{{STORY_EXCERPT}}",
+    "url": "https://antarvasnapur.in/stories/{{STORY_SLUG}}.html",
+    "datePublished": "{{STORY_DATE}}",
+    "author": {
+      "@type": "Organization",
+      "name": "AntarVasna Pur"
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": "AntarVasna Pur",
+      "url": "https://antarvasnapur.in"
+    }
+  }
+  </script>
+
+  <!-- Breadcrumb Schema -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      {"@type": "ListItem", "position": 1, "name": "होम", "item": "https://antarvasnapur.in"},
+      {"@type": "ListItem", "position": 2, "name": "{{STORY_CATEGORY}}", "item": "https://antarvasnapur.in/category.html?cat={{STORY_CATEGORY_ID}}"},
+      {"@type": "ListItem", "position": 3, "name": "{{STORY_TITLE}}", "item": "https://antarvasnapur.in/stories/{{STORY_SLUG}}.html"}
+    ]
+  }
+  </script>
+
+  <script>
+    window.STORY_SLUG = '{{STORY_SLUG}}';
+    window.STORY_TITLE = '{{STORY_TITLE}}';
+    window.STORY_CATS = []; // Fill with actual categories
+  </script>
+</head>
+<body>
+
+<div id="progress-bar"></div>
+
+<header>
+  <div class="header-inner">
+    <a class="logo" href="/">अंतरवासना <span>पुर</span></a>
+    <nav>
+      <a href="/">होम</a>
+      <a href="/all-stories.html">सभी कहानियाँ</a>
+      <a href="/category.html?cat=desi">देसी</a>
+      <a href="/category.html?cat=romance">रोमांस</a>
+    </nav>
+    <div class="header-actions">
+      <button id="darkmode-btn" class="btn-icon">🌙</button>
+      <button class="btn-icon" data-random title="यादृच्छिक कहानी">🎲</button>
+      <button class="hamburger" id="hamburger"><span></span><span></span><span></span></button>
+    </div>
+  </div>
+</header>
+
+<nav class="mobile-nav" id="mobile-nav">
+  <a href="/">होम</a>
+  <a href="/all-stories.html">सभी कहानियाँ</a>
+  <a href="/search.html">खोजें</a>
+</nav>
+
+<div class="container">
+  <article class="story-page">
+
+    <!-- Breadcrumb -->
+    <nav class="breadcrumb">
+      <a href="/">होम</a>
+      <span>›</span>
+      <a href="/category.html?cat={{STORY_CATEGORY_ID}}">{{STORY_CATEGORY}}</a>
+      <span>›</span>
+      <span>{{STORY_TITLE}}</span>
+    </nav>
+
+    <!-- Story Header -->
+    <header class="story-header">
+      <div class="story-cats">
+        <a class="cat-badge" href="/category.html?cat={{STORY_CATEGORY_ID}}">{{STORY_CATEGORY}}</a>
+      </div>
+
+      <h1 class="story-title">{{STORY_TITLE}}</h1>
+
+      <div class="story-meta-bar">
+        <div class="meta-item">📅 <span>{{STORY_DATE_FORMATTED}}</span></div>
+        <div class="meta-item">👁 <span>{{STORY_VIEWS}} बार पढ़ी गई</span></div>
+        <div class="meta-item">⏱ <span id="reading-time">पढ़ने में लोड हो रहा है...</span></div>
+        <div class="meta-item">📝 <span id="word-count">शब्द गिन रहे हैं...</span></div>
+        <div class="meta-item">⭐ <span>{{STORY_RATING}}/5</span></div>
+      </div>
+    </header>
+
+    <!-- Story Content -->
+    <div class="story-content" id="story-content">
+      <p>{{STORY_CONTENT_PARAGRAPH_1}}</p>
+      <p>{{STORY_CONTENT_PARAGRAPH_2}}</p>
+      <!-- Add more paragraphs as needed -->
+    </div>
+
+    <!-- Story Actions -->
+    <div class="story-actions">
+      <button class="action-btn" data-bookmark>🔖 सेव करें</button>
+      <button class="action-btn" data-random>🎲 यादृच्छिक</button>
+      <a class="action-btn" href="/all-stories.html">📚 सभी कहानियाँ</a>
+    </div>
+
+    <!-- Rating -->
+    <div class="rating-widget">
+      <h4>इस कहानी को रेट करें:</h4>
+      <div class="rating-stars" id="rating-stars">
+        <span>☆</span><span>☆</span><span>☆</span><span>☆</span><span>☆</span>
+      </div>
+    </div>
+
+    <!-- Tags -->
+    <div style="margin:24px 0;">
+      <strong style="font-size:0.85rem;color:var(--text-muted);">टैग:</strong>
+      <div class="story-tags" style="margin-top:8px;display:flex;gap:6px;flex-wrap:wrap;">
+        <!-- Tags: <a class="tag-pill" href="/tag.html?tag={{TAG}}">{{TAG}}</a> -->
+      </div>
+    </div>
+
+    <!-- Story Navigation -->
+    <nav class="story-nav" id="story-nav">
+      <!-- Filled dynamically -->
+    </nav>
+
+    <!-- Related Stories -->
+    <section style="margin-top:40px;">
+      <div class="section-header">
+        <h2 class="section-title">संबंधित कहानियाँ</h2>
+      </div>
+      <div id="related-stories">
+        <div class="loading"><div class="spinner"></div></div>
+      </div>
+    </section>
+
+  </article>
+</div>
+
+<footer>
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <div class="logo">अंतरवासना पुर</div>
+      <p>हिंदी कहानियों का सबसे बड़ा संग्रह।</p>
+    </div>
+    <div class="footer-col">
+      <h4>श्रेणियाँ</h4>
+      <ul>
+        <li><a href="/category.html?cat=desi">देसी</a></li>
+        <li><a href="/category.html?cat=romance">रोमांस</a></li>
+        <li><a href="/category.html?cat=family">परिवार</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>पेज</h4>
+      <ul>
+        <li><a href="/all-stories.html">सभी कहानियाँ</a></li>
+        <li><a href="/search.html">खोजें</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>© 2024 AntarVasna Pur</span>
+    <span>antarvasnapur.in</span>
+  </div>
+</footer>
+
+<button id="back-to-top">↑</button>
+
+<script src="/js/main.js"></script>
+<script src="/js/darkmode.js"></script>
+<script src="/js/progress.js"></script>
+<script src="/js/random.js"></script>
+<script src="/js/bookmarks.js"></script>
+<script src="/js/rating.js"></script>
+<script src="/js/related.js"></script>
+<script src="/js/analytics.js"></script>
+
+<script>
+document.getElementById('hamburger').addEventListener('click', () => {
+  document.getElementById('mobile-nav').classList.toggle('open');
+});
+
+// Word count & reading time
+function calcReadingStats() {
+  const content = document.getElementById('story-content');
+  if (!content) return;
+  const words = content.innerText.trim().split(/\s+/).length;
+  const mins = Math.ceil(words / 200);
+  document.getElementById('word-count').textContent = words.toLocaleString('hi') + ' शब्द';
+  document.getElementById('reading-time').textContent = mins + ' मिनट पढ़ना';
+}
+
+// Story prev/next navigation
+async function buildStoryNav(currentSlug) {
+  const data = await window.APP.loadStories();
+  const sorted = [...data.stories].sort((a, b) => new Date(b.date) - new Date(a.date));
+  const idx = sorted.findIndex(s => s.slug === currentSlug);
+  const nav = document.getElementById('story-nav');
+  if (!nav) return;
+
+  const prev = sorted[idx + 1];
+  const next = sorted[idx - 1];
+
+  nav.innerHTML = `
+    ${prev ? `<a class="story-nav-item prev" href="/stories/${prev.slug}.html">
+      <div class="nav-label">‹ पिछली कहानी</div>
+      <div class="nav-title">${prev.title}</div>
+    </a>` : '<div></div>'}
+    ${next ? `<a class="story-nav-item next" href="/stories/${next.slug}.html">
+      <div class="nav-label">अगली कहानी ›</div>
+      <div class="nav-title">${next.title}</div>
+    </a>` : '<div></div>'}`;
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+  calcReadingStats();
+  if (window.STORY_SLUG) {
+    window.APP_BOOKMARKS.initBookmarkBtn(window.STORY_SLUG, window.STORY_TITLE);
+    initRating(window.STORY_SLUG);
+    buildStoryNav(window.STORY_SLUG);
+    if (window.STORY_CATS) {
+      buildRelated(window.STORY_SLUG, window.STORY_CATS, 'related-stories');
+    }
+  }
+});
+</script>
+
+</body>
+</html>
