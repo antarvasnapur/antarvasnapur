@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="hi" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AntarVasna Pur — हिंदी कहानियाँ</title>
+  <meta name="description" content="अंतरवासना पुर — हिंदी की सर्वश्रेष्ठ कहानियों का संग्रह। Desi, Romance, Village, Family और अनेक श्रेणियों में हजारों कहानियाँ।">
+  <meta name="keywords" content="hindi kahani, antarvasna, desi kahani, hindi story, hindi romance">
+  <link rel="canonical" href="https://antarvasnapur.in/">
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="AntarVasna Pur — हिंदी कहानियाँ">
+  <meta property="og:description" content="हिंदी की सर्वश्रेष्ठ कहानियों का संग्रह">
+  <meta property="og:url" content="https://antarvasnapur.in/">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="AntarVasna Pur">
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="AntarVasna Pur — हिंदी कहानियाँ">
+  <meta name="twitter:description" content="हिंदी की सर्वश्रेष्ठ कहानियों का संग्रह">
+
+  <link rel="stylesheet" href="/css/style.css">
+
+  <!-- Schema.org -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    "name": "AntarVasna Pur",
+    "url": "https://antarvasnapur.in",
+    "description": "हिंदी कहानियों का संग्रह",
+    "potentialAction": {
+      "@type": "SearchAction",
+      "target": "https://antarvasnapur.in/search.html?q={search_term_string}",
+      "query-input": "required name=search_term_string"
+    }
+  }
+  </script>
+</head>
+<body>
+
+<div id="progress-bar"></div>
+
+<!-- Header -->
+<header>
+  <div class="header-inner">
+    <a class="logo" href="/">अंतरवासना <span>पुर</span></a>
+    <nav>
+      <a href="/" class="active">होम</a>
+      <a href="/all-stories.html">सभी कहानियाँ</a>
+      <a href="/category.html?cat=desi">देसी</a>
+      <a href="/category.html?cat=romance">रोमांस</a>
+      <a href="/category.html?cat=family">परिवार</a>
+    </nav>
+    <div class="header-actions">
+      <form class="search-form" style="background:var(--bg-secondary);border-radius:6px;box-shadow:none;flex:0 1 200px;" onsubmit="event.preventDefault();const q=this.querySelector('input').value.trim();if(q)window.location.href='/search.html?q='+encodeURIComponent(q)">
+        <input type="search" placeholder="खोजें..." style="padding:8px 14px;font-size:0.85rem;">
+        <button style="padding:8px 14px;font-size:0.85rem;">🔍</button>
+      </form>
+      <button id="darkmode-btn" class="btn-icon" title="डार्क मोड">🌙</button>
+      <button class="btn-icon" title="यादृच्छिक कहानी" data-random>🎲</button>
+      <button class="hamburger" id="hamburger" aria-label="मेनू">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<!-- Mobile Nav -->
+<nav class="mobile-nav" id="mobile-nav">
+  <a href="/">होम</a>
+  <a href="/all-stories.html">सभी कहानियाँ</a>
+  <a href="/category.html?cat=desi">देसी</a>
+  <a href="/category.html?cat=romance">रोमांस</a>
+  <a href="/category.html?cat=family">परिवार</a>
+  <a href="/search.html">खोजें</a>
+</nav>
+
+<!-- Hero -->
+<section class="hero">
+  <h1>अंतरवासना पुर</h1>
+  <p>हिंदी कहानियों का सबसे बड़ा संग्रह — हज़ारों कहानियाँ, एक जगह</p>
+  <form class="search-form">
+    <input type="search" id="hero-search" placeholder="कहानी खोजें... जैसे: देसी, रोमांस, गाँव">
+    <button type="submit">खोजें</button>
+  </form>
+</section>
+
+<!-- Main Content -->
+<div class="container">
+  <div class="layout-grid">
+
+    <!-- Left: Main Content -->
+    <main>
+
+      <!-- Latest Stories -->
+      <section class="mb-8">
+        <div class="section-header">
+          <h2 class="section-title">नवीनतम कहानियाँ</h2>
+          <a class="see-all" href="/all-stories.html">सभी देखें</a>
+        </div>
+        <div class="stories-grid" id="latest-stories">
+          <div class="loading"><div class="spinner"></div>लोड हो रहा है...</div>
+        </div>
+        <div class="pagination" id="latest-pagination"></div>
+      </section>
+
+      <!-- Trending Section -->
+      <section class="mb-8">
+        <div class="section-header">
+          <h2 class="section-title">🔥 ट्रेंडिंग कहानियाँ</h2>
+        </div>
+        <div id="trending-list">
+          <div class="loading"><div class="spinner"></div>लोड हो रहा है...</div>
+        </div>
+      </section>
+
+      <!-- Category Sections -->
+      <div id="category-sections">
+        <div class="loading"><div class="spinner"></div>श्रेणियाँ लोड हो रही हैं...</div>
+      </div>
+
+    </main>
+
+    <!-- Sidebar -->
+    <aside class="sidebar">
+
+      <!-- Random Story -->
+      <div class="sidebar-widget">
+        <button class="btn-random" data-random>🎲 यादृच्छिक कहानी पढ़ें</button>
+      </div>
+
+      <!-- Categories -->
+      <div class="sidebar-widget">
+        <h3 class="widget-title">📂 श्रेणियाँ</h3>
+        <ul class="cat-list" id="sidebar-categories">
+          <div class="loading" style="padding:20px 0"><div class="spinner"></div></div>
+        </ul>
+      </div>
+
+      <!-- Most Viewed -->
+      <div class="sidebar-widget">
+        <h3 class="widget-title">👁 सर्वाधिक पढ़ी गई</h3>
+        <div id="most-viewed-list">
+          <div class="loading" style="padding:20px 0"><div class="spinner"></div></div>
+        </div>
+      </div>
+
+      <!-- Tags Cloud -->
+      <div class="sidebar-widget">
+        <h3 class="widget-title">🏷️ लोकप्रिय टैग</h3>
+        <div class="tags-cloud" id="sidebar-tags">
+          <div class="loading" style="padding:20px 0"><div class="spinner"></div></div>
+        </div>
+      </div>
+
+    </aside>
+  </div>
+</div>
+
+<!-- Footer -->
+<footer>
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <div class="logo">अंतरवासना पुर</div>
+      <p>हिंदी कहानियों का सबसे बड़ा संग्रह। हर रोज़ नई कहानियाँ, हर श्रेणी में।</p>
+    </div>
+    <div class="footer-col">
+      <h4>श्रेणियाँ</h4>
+      <ul>
+        <li><a href="/category.html?cat=desi">देसी</a></li>
+        <li><a href="/category.html?cat=romance">रोमांस</a></li>
+        <li><a href="/category.html?cat=family">परिवार</a></li>
+        <li><a href="/category.html?cat=village">गाँव</a></li>
+        <li><a href="/category.html?cat=college">कॉलेज</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>पेज</h4>
+      <ul>
+        <li><a href="/all-stories.html">सभी कहानियाँ</a></li>
+        <li><a href="/search.html">खोजें</a></li>
+        <li><a href="/sitemap.html">साइटमैप</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>जानकारी</h4>
+      <ul>
+        <li><a href="#">हमारे बारे में</a></li>
+        <li><a href="#">गोपनीयता नीति</a></li>
+        <li><a href="#">संपर्क</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>© 2024 AntarVasna Pur. सर्वाधिकार सुरक्षित।</span>
+    <span>antarvasnapur.in</span>
+  </div>
+</footer>
+
+<button id="back-to-top" title="ऊपर जाएं">↑</button>
+
+<script src="/js/main.js"></script>
+<script src="/js/darkmode.js"></script>
+<script src="/js/progress.js"></script>
+<script src="/js/pagination.js"></script>
+<script src="/js/random.js"></script>
+<script src="/js/trending.js"></script>
+<script src="/js/categories.js"></script>
+<script src="/js/tags.js"></script>
+<script src="/js/analytics.js"></script>
+
+<script>
+// Hamburger menu
+document.getElementById('hamburger').addEventListener('click', () => {
+  document.getElementById('mobile-nav').classList.toggle('open');
+});
+
+// Hero search
+document.querySelector('.hero .search-form').addEventListener('submit', e => {
+  e.preventDefault();
+  const q = document.getElementById('hero-search').value.trim();
+  if (q) window.location.href = '/search.html?q=' + encodeURIComponent(q);
+});
+
+// Build latest stories with pagination
+async function buildLatestWithPagination() {
+  const data = await window.APP.loadStories();
+  const sorted = [...data.stories].sort((a, b) => new Date(b.date) - new Date(a.date));
+  createPagination(sorted, 10, window.APP.storyCardHTML, 'latest-stories', 'latest-pagination');
+}
+
+// Build category preview sections
+async function buildCategorySections() {
+  const data = await window.APP.loadStories();
+  const el = document.getElementById('category-sections');
+  if (!el) return;
+
+  const showCats = ['desi', 'romance', 'family', 'village'];
+  let html = '';
+
+  for (const catId of showCats) {
+    const catInfo = data.categories.find(c => c.id === catId);
+    if (!catInfo) continue;
+    const stories = data.stories.filter(s => (s.categories || []).includes(catId)).slice(0, 5);
+    if (!stories.length) continue;
+
+    html += `
+      <section class="mb-8">
+        <div class="section-header">
+          <h2 class="section-title">${catInfo.name} कहानियाँ</h2>
+          <a class="see-all" href="/category.html?cat=${catId}">सभी देखें</a>
+        </div>
+        <div class="cards-grid">
+          ${stories.map(s => window.APP.smallCardHTML(s)).join('')}
+        </div>
+      </section>`;
+  }
+
+  el.innerHTML = html;
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+  buildLatestWithPagination();
+  buildCategorySections();
+});
+</script>
+
+</body>
+</html>

@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="hi" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title id="page-title">श्रेणी — AntarVasna Pur</title>
+  <meta name="description" id="page-desc" content="श्रेणी के अनुसार हिंदी कहानियाँ — AntarVasna Pur">
+  <link rel="canonical" href="https://antarvasnapur.in/category.html">
+  <link rel="stylesheet" href="/css/style.css">
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "CollectionPage",
+    "name": "Category — AntarVasna Pur",
+    "url": "https://antarvasnapur.in/category.html"
+  }
+  </script>
+</head>
+<body>
+
+<div id="progress-bar"></div>
+
+<header>
+  <div class="header-inner">
+    <a class="logo" href="/">अंतरवासना <span>पुर</span></a>
+    <nav>
+      <a href="/">होम</a>
+      <a href="/all-stories.html">सभी कहानियाँ</a>
+      <a href="/category.html?cat=desi">देसी</a>
+      <a href="/category.html?cat=romance">रोमांस</a>
+      <a href="/category.html?cat=family">परिवार</a>
+    </nav>
+    <div class="header-actions">
+      <button id="darkmode-btn" class="btn-icon">🌙</button>
+      <button class="btn-icon" data-random>🎲</button>
+      <button class="hamburger" id="hamburger"><span></span><span></span><span></span></button>
+    </div>
+  </div>
+</header>
+
+<nav class="mobile-nav" id="mobile-nav">
+  <a href="/">होम</a>
+  <a href="/all-stories.html">सभी कहानियाँ</a>
+  <a href="/category.html?cat=desi">देसी</a>
+  <a href="/category.html?cat=romance">रोमांस</a>
+  <a href="/search.html">खोजें</a>
+</nav>
+
+<section class="page-hero">
+  <h1 id="cat-title">श्रेणी</h1>
+  <p id="cat-desc">इस श्रेणी की सभी कहानियाँ</p>
+</section>
+
+<div class="container">
+  <div class="layout-grid">
+    <main>
+      <div class="stories-grid" id="category-results">
+        <div class="loading"><div class="spinner"></div>लोड हो रहा है...</div>
+      </div>
+      <div class="pagination" id="cat-pagination"></div>
+    </main>
+
+    <aside class="sidebar">
+      <div class="sidebar-widget">
+        <h3 class="widget-title">📂 सभी श्रेणियाँ</h3>
+        <ul class="cat-list" id="sidebar-categories"></ul>
+      </div>
+      <div class="sidebar-widget">
+        <h3 class="widget-title">🏷️ टैग</h3>
+        <div class="tags-cloud" id="sidebar-tags"></div>
+      </div>
+      <div class="sidebar-widget">
+        <button class="btn-random" data-random>🎲 यादृच्छिक कहानी</button>
+      </div>
+    </aside>
+  </div>
+</div>
+
+<footer>
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <div class="logo">अंतरवासना पुर</div>
+      <p>हिंदी कहानियों का सबसे बड़ा संग्रह।</p>
+    </div>
+    <div class="footer-col">
+      <h4>श्रेणियाँ</h4>
+      <ul>
+        <li><a href="/category.html?cat=desi">देसी</a></li>
+        <li><a href="/category.html?cat=romance">रोमांस</a></li>
+        <li><a href="/category.html?cat=family">परिवार</a></li>
+        <li><a href="/category.html?cat=village">गाँव</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>पेज</h4>
+      <ul>
+        <li><a href="/all-stories.html">सभी कहानियाँ</a></li>
+        <li><a href="/search.html">खोजें</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>© 2024 AntarVasna Pur</span>
+    <span>antarvasnapur.in</span>
+  </div>
+</footer>
+
+<button id="back-to-top">↑</button>
+
+<script src="/js/main.js"></script>
+<script src="/js/darkmode.js"></script>
+<script src="/js/progress.js"></script>
+<script src="/js/pagination.js"></script>
+<script src="/js/random.js"></script>
+<script src="/js/categories.js"></script>
+<script src="/js/tags.js"></script>
+<script src="/js/analytics.js"></script>
+
+<script>
+document.getElementById('hamburger').addEventListener('click', () => {
+  document.getElementById('mobile-nav').classList.toggle('open');
+});
+
+// Update page title dynamically
+const cat = new URLSearchParams(window.location.search).get('cat') || '';
+if (cat) {
+  const title = cat.charAt(0).toUpperCase() + cat.slice(1);
+  document.getElementById('page-title').textContent = title + ' कहानियाँ — AntarVasna Pur';
+  document.getElementById('page-desc').setAttribute('content', title + ' श्रेणी की हिंदी कहानियाँ — AntarVasna Pur');
+}
+</script>
+
+</body>
+</html>
