@@ -1,147 +1,75 @@
 <!DOCTYPE html>
-<html lang="hi" data-theme="light">
+<html lang="hi" dir="ltr">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>साइटमैप — AntarVasna Pur</title>
-  <meta name="description" content="AntarVasna Pur का पूरा साइटमैप — सभी पेज और कहानियाँ">
-  <link rel="canonical" href="https://antarvasnapur.in/sitemap.html">
-  <link rel="stylesheet" href="/css/style.css">
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sitemap - Antarvasnapur</title>
+<link rel="canonical" href="https://antarvasnapur.in/sitemap.html">
+<link rel="stylesheet" href="/css/style.css">
+<script src="/js/darkmode.js"></script>
 </head>
 <body>
+<div id="reading-progress"></div>
+<div class="notice-bar">⚠️ Adult content (18+). By continuing you confirm you are 18+.</div>
+<main class="container" style="padding:32px 0 60px">
+  <nav class="breadcrumb"><a href="/">Home</a><span class="breadcrumb-sep">›</span><span>Sitemap</span></nav>
+  <h1 style="font-family:var(--fd);font-size:2rem;margin-bottom:8px">Sitemap</h1>
+  <p style="color:var(--text-m);margin-bottom:36px">Complete index of all pages</p>
 
-<div id="progress-bar"></div>
-
-<header>
-  <div class="header-inner">
-    <a class="logo" href="/">अंतरवासना <span>पुर</span></a>
-    <nav>
-      <a href="/">होम</a>
-      <a href="/all-stories.html">सभी कहानियाँ</a>
-      <a href="/category.html?cat=desi">देसी</a>
-      <a href="/category.html?cat=romance">रोमांस</a>
-    </nav>
-    <div class="header-actions">
-      <button id="darkmode-btn" class="btn-icon">🌙</button>
-      <button class="hamburger" id="hamburger"><span></span><span></span><span></span></button>
-    </div>
-  </div>
-</header>
-
-<nav class="mobile-nav" id="mobile-nav">
-  <a href="/">होम</a>
-  <a href="/all-stories.html">सभी कहानियाँ</a>
-</nav>
-
-<section class="page-hero">
-  <h1>साइटमैप</h1>
-  <p>AntarVasna Pur के सभी पेज और कहानियाँ</p>
-</section>
-
-<div class="container" style="padding-top:40px;padding-bottom:60px;">
-
-  <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:28px;">
-
-    <!-- Main Pages -->
-    <div class="sidebar-widget">
-      <h3 class="widget-title">📄 मुख्य पेज</h3>
-      <ul class="cat-list">
-        <li><a href="/">होम</a></li>
-        <li><a href="/all-stories.html">सभी कहानियाँ</a></li>
-        <li><a href="/search.html">खोजें</a></li>
-        <li><a href="/sitemap.html">साइटमैप</a></li>
-      </ul>
-    </div>
-
-    <!-- Categories -->
-    <div class="sidebar-widget">
-      <h3 class="widget-title">📂 श्रेणियाँ</h3>
-      <ul class="cat-list" id="sitemap-cats">
-        <div class="loading" style="padding:10px"><div class="spinner"></div></div>
-      </ul>
-    </div>
-
-    <!-- Tags -->
-    <div class="sidebar-widget">
-      <h3 class="widget-title">🏷️ टैग</h3>
-      <div class="tags-cloud" id="sitemap-tags"></div>
-    </div>
-
-  </div>
-
-  <!-- Stories List -->
-  <div style="margin-top:40px;">
-    <div class="section-header">
-      <h2 class="section-title">📚 सभी कहानियाँ</h2>
-    </div>
-    <div style="columns:2 320px;column-gap:24px;margin-top:16px;" id="sitemap-stories">
-      <div class="loading"><div class="spinner"></div></div>
+  <div class="sitemap-section">
+    <h2>Main Pages</h2>
+    <div class="sitemap-links">
+      <a href="/">Home</a>
+      <a href="/all-stories.html">All Stories</a>
+      <a href="/category.html">All Categories</a>
+      <a href="/tag.html">All Tags</a>
+      <a href="/search.html">Search</a>
     </div>
   </div>
 
-</div>
-
-<footer>
-  <div class="footer-grid">
-    <div class="footer-brand">
-      <div class="logo">अंतरवासना पुर</div>
-      <p>हिंदी कहानियों का सबसे बड़ा संग्रह।</p>
-    </div>
-    <div class="footer-col">
-      <h4>श्रेणियाँ</h4>
-      <ul>
-        <li><a href="/category.html?cat=desi">देसी</a></li>
-        <li><a href="/category.html?cat=romance">रोमांस</a></li>
-        <li><a href="/category.html?cat=family">परिवार</a></li>
-      </ul>
+  <div class="sitemap-section">
+    <h2>Categories</h2>
+    <div class="sitemap-links">
+      <a href="/category.html?c=Romantic+Stories">Romantic Stories</a>
+      <a href="/category.html?c=Desi+Stories">Desi Stories</a>
+      <a href="/category.html?c=Bhabhi+Stories">Bhabhi Stories</a>
+      <a href="/category.html?c=Village+Stories">Village Stories</a>
+      <a href="/category.html?c=College+Stories">College Stories</a>
     </div>
   </div>
-  <div class="footer-bottom">
-    <span>© 2024 AntarVasna Pur</span>
-    <span>antarvasnapur.in</span>
+
+  <div class="sitemap-section">
+    <h2>All Stories</h2>
+    <div class="sitemap-links" id="sitemap-stories">
+      <span style="color:var(--text-l);font-size:.85rem">Loading stories…</span>
+    </div>
   </div>
-</footer>
 
-<button id="back-to-top">↑</button>
+  <div class="sitemap-section">
+    <h2>Info &amp; Legal</h2>
+    <div class="sitemap-links">
+      <a href="/about.html">About Us</a>
+      <a href="/contact.html">Contact</a>
+      <a href="/privacy-policy.html">Privacy Policy</a>
+      <a href="/disclaimer.html">Disclaimer</a>
+      <a href="/terms.html">Terms</a>
+      <a href="/dmca.html">DMCA</a>
+    </div>
+  </div>
 
+  <p style="font-size:.85rem;color:var(--text-m);margin-top:24px">For search engines: <a href="/sitemap.xml">/sitemap.xml</a></p>
+</main>
+<script src="/js/layout.js"></script>
 <script src="/js/main.js"></script>
-<script src="/js/darkmode.js"></script>
 <script src="/js/progress.js"></script>
 <script src="/js/analytics.js"></script>
-
 <script>
-document.getElementById('hamburger').addEventListener('click', () => {
-  document.getElementById('mobile-nav').classList.toggle('open');
+document.addEventListener('DOMContentLoaded', async () => {
+  const stories = await window.SITE.loadStories();
+  const el = document.getElementById('sitemap-stories');
+  if (el && stories.length) {
+    el.innerHTML = stories.map(s => `<a href="/stories/${s.slug}.html">${s.title}</a>`).join('');
+  }
 });
-
-async function buildSitemap() {
-  const data = await window.APP.loadStories();
-
-  // Categories
-  const catsEl = document.getElementById('sitemap-cats');
-  catsEl.innerHTML = data.categories.map(c =>
-    `<li><a href="/category.html?cat=${c.id}">${c.name} <span class="count">${c.count}</span></a></li>`
-  ).join('');
-
-  // Tags
-  const tagsEl = document.getElementById('sitemap-tags');
-  tagsEl.innerHTML = data.tags.map(t =>
-    `<a href="/tag.html?tag=${t}">#${t}</a>`
-  ).join('');
-
-  // Stories
-  const storiesEl = document.getElementById('sitemap-stories');
-  storiesEl.innerHTML = data.stories.map(s =>
-    `<div style="break-inside:avoid;margin-bottom:8px;">
-      <a href="/stories/${s.slug}.html" style="color:var(--text-muted);font-size:0.88rem;display:flex;align-items:center;gap:6px;padding:4px 0;">
-        <span style="color:var(--accent)">›</span> ${s.title}
-      </a>
-    </div>`
-  ).join('');
-}
-
-document.addEventListener('DOMContentLoaded', buildSitemap);
 </script>
-
 </body>
 </html>

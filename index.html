@@ -1,586 +1,110 @@
 <!DOCTYPE html>
-<html lang="hi" data-theme="light">
+<html lang="hi" dir="ltr">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>AntarVasna Pur — हिंदी कहानियाँ</title>
-  <meta name="description" content="अंतरवासना पुर — हिंदी की सर्वश्रेष्ठ कहानियों का संग्रह। Desi, Romance, Village, Family और अनेक श्रेणियों में हजारों कहानियाँ।">
-  <meta name="keywords" content="hindi kahani, antarvasna, desi kahani, hindi story, hindi romance">
-  <link rel="canonical" href="https://antarvasnapur.in/">
-  <meta property="og:title" content="AntarVasna Pur — हिंदी कहानियाँ">
-  <meta property="og:description" content="हिंदी की सर्वश्रेष्ठ कहानियों का संग्रह">
-  <meta property="og:url" content="https://antarvasnapur.in/">
-  <meta property="og:type" content="website">
-  <meta property="og:site_name" content="AntarVasna Pur">
-  <meta name="twitter:card" content="summary">
-  <meta name="twitter:title" content="AntarVasna Pur — हिंदी कहानियाँ">
-  <meta name="twitter:description" content="हिंदी की सर्वश्रेष्ठ कहानियों का संग्रह">
-  <link rel="stylesheet" href="/css/style.css">
-  <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebSite","name":"AntarVasna Pur","url":"https://antarvasnapur.in","potentialAction":{"@type":"SearchAction","target":"https://antarvasnapur.in/search.html?q={search_term_string}","query-input":"required name=search_term_string"}}</script>
-
-  <style>
-    /* ─── Header mobile fix ─── */
-    @media (max-width: 820px) {
-      header nav { display: none !important; }
-      .hamburger { display: flex !important; }
-      .header-inner { justify-content: space-between; }
-    }
-
-    /* ─── Redesigned Hero ─── */
-    .hero-v2 { background: var(--bg); }
-
-    .hero-top {
-      background: linear-gradient(135deg, #160806 0%, #3a1008 55%, #160806 100%);
-      padding: 60px 20px 76px;
-      text-align: center;
-      position: relative;
-      overflow: hidden;
-    }
-    .hero-top::before {
-      content: '';
-      position: absolute; inset: 0;
-      background:
-        radial-gradient(ellipse at 25% 60%, rgba(192,57,43,0.28) 0%, transparent 55%),
-        radial-gradient(ellipse at 78% 25%, rgba(192,57,43,0.16) 0%, transparent 48%);
-      pointer-events: none;
-    }
-    .hero-top > * { position: relative; }
-
-    .hero-badge {
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      background: rgba(192,57,43,0.18);
-      border: 1px solid rgba(192,57,43,0.38);
-      color: #ffb3a7;
-      font-size: 0.72rem;
-      font-weight: 700;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      padding: 5px 16px;
-      border-radius: 50px;
-      margin-bottom: 20px;
-    }
-
-    .hero-top h1 {
-      font-family: var(--font-heading);
-      font-size: clamp(2.2rem, 6vw, 3.8rem);
-      color: #fff;
-      line-height: 1.12;
-      margin-bottom: 12px;
-    }
-    .hero-top h1 em { font-style: normal; color: #ff7a66; }
-
-    .hero-top .hero-sub {
-      color: rgba(255,255,255,0.55);
-      font-size: 1rem;
-      margin-bottom: 36px;
-      max-width: 500px;
-      margin-left: auto;
-      margin-right: auto;
-    }
-
-    /* Search box */
-    .hero-search-outer {
-      max-width: 580px;
-      margin: 0 auto;
-    }
-    .hero-search-box {
-      display: flex;
-      background: rgba(255,255,255,0.07);
-      border: 1.5px solid rgba(255,255,255,0.14);
-      border-radius: 14px;
-      overflow: hidden;
-      backdrop-filter: blur(12px);
-      transition: border-color 0.25s, box-shadow 0.25s;
-    }
-    .hero-search-box:focus-within {
-      border-color: rgba(232,80,63,0.7);
-      box-shadow: 0 0 0 4px rgba(232,80,63,0.18);
-    }
-    .hero-search-box input {
-      flex: 1;
-      padding: 16px 20px;
-      background: transparent;
-      border: none;
-      outline: none;
-      font-size: 1rem;
-      font-family: var(--font-body);
-      color: #fff;
-      min-width: 0;
-    }
-    .hero-search-box input::placeholder { color: rgba(255,255,255,0.38); }
-    .hero-search-box button {
-      padding: 0 22px;
-      background: var(--accent);
-      border: none;
-      color: #fff;
-      font-size: 0.9rem;
-      font-weight: 700;
-      font-family: var(--font-body);
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      gap: 7px;
-      white-space: nowrap;
-      transition: background 0.2s;
-      flex-shrink: 0;
-    }
-    .hero-search-box button:hover { background: #e8503f; }
-
-    /* Quick chips */
-    .hero-chips {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 8px;
-      margin-top: 16px;
-      flex-wrap: wrap;
-    }
-    .hero-chips-label {
-      font-size: 0.72rem;
-      color: rgba(255,255,255,0.38);
-      letter-spacing: 0.05em;
-      text-transform: uppercase;
-    }
-    .hero-chip {
-      padding: 5px 14px;
-      background: rgba(255,255,255,0.07);
-      border: 1px solid rgba(255,255,255,0.11);
-      border-radius: 50px;
-      color: rgba(255,255,255,0.65);
-      font-size: 0.78rem;
-      text-decoration: none;
-      transition: all 0.2s;
-    }
-    .hero-chip:hover {
-      background: var(--accent);
-      border-color: var(--accent);
-      color: #fff;
-    }
-
-    /* Stats strip */
-    .hero-stats {
-      background: var(--bg-card);
-      border-bottom: 1px solid var(--border);
-    }
-    .hero-stats-inner {
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: 0 20px;
-      display: flex;
-      overflow-x: auto;
-      scrollbar-width: none;
-    }
-    .hero-stats-inner::-webkit-scrollbar { display: none; }
-    .stat-item {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      padding: 14px 28px 14px 0;
-      margin-right: 28px;
-      border-right: 1px solid var(--border);
-      white-space: nowrap;
-      flex-shrink: 0;
-    }
-    .stat-item:last-child { border-right: none; margin-right: 0; }
-    .stat-icon {
-      width: 36px; height: 36px;
-      background: rgba(192,57,43,0.09);
-      border-radius: 9px;
-      display: flex; align-items: center; justify-content: center;
-      font-size: 1rem; flex-shrink: 0;
-    }
-    .stat-val { font-size: 1.05rem; font-weight: 700; color: var(--text); line-height: 1; }
-    .stat-lbl { font-size: 0.7rem; color: var(--text-light); margin-top: 2px; }
-
-    /* ─── Footer V2 ─── */
-    footer.footer-v2 {
-      background: var(--bg-card);
-      border-top: 1px solid var(--border);
-      margin-top: 60px;
-      padding: 0;
-    }
-    .footer-main {
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: 48px 20px 36px;
-      display: grid;
-      grid-template-columns: 2fr 1fr 1fr 1fr 1fr;
-      gap: 40px;
-    }
-    @media (max-width: 960px) {
-      .footer-main { grid-template-columns: 1fr 1fr 1fr; gap: 28px; }
-    }
-    @media (max-width: 560px) {
-      .footer-main { grid-template-columns: 1fr 1fr; gap: 22px; padding: 32px 20px 24px; }
-    }
-
-    .footer-brand { display: flex; flex-direction: column; gap: 0; }
-    .footer-brand .logo { font-size: 1.25rem; margin-bottom: 10px; display: inline-block; }
-    .footer-brand p { font-size: 0.82rem; color: var(--text-muted); line-height: 1.75; margin-bottom: 16px; }
-    .footer-badge-links { display: flex; gap: 8px; flex-wrap: wrap; }
-    .footer-badge-link {
-      font-size: 0.75rem; color: var(--text-light);
-      border: 1px solid var(--border); padding: 4px 12px;
-      border-radius: 50px; transition: all 0.2s;
-    }
-    .footer-badge-link:hover { color: var(--accent); border-color: var(--accent); }
-
-    .footer-col h4 {
-      font-size: 0.75rem; font-weight: 800;
-      text-transform: uppercase; letter-spacing: 0.09em;
-      color: var(--text); margin-bottom: 14px;
-    }
-    .footer-col ul { list-style: none; display: flex; flex-direction: column; gap: 9px; }
-    .footer-col ul a { font-size: 0.83rem; color: var(--text-muted); transition: color 0.2s; }
-    .footer-col ul a:hover { color: var(--accent); }
-
-    .footer-bottom-bar {
-      border-top: 1px solid var(--border);
-      padding: 14px 20px;
-    }
-    .footer-bottom-inner {
-      max-width: 1200px;
-      margin: 0 auto;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      font-size: 0.77rem;
-      color: var(--text-light);
-      gap: 12px;
-      flex-wrap: wrap;
-    }
-    .footer-legal {
-      display: flex; gap: 14px; flex-wrap: wrap;
-    }
-    .footer-legal a { color: var(--text-light); font-size: 0.77rem; }
-    .footer-legal a:hover { color: var(--accent); }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Antarvasnapur - Hindi Stories | हिंदी कहानियाँ</title>
+<meta name="description" content="Read the best Hindi stories online. Romantic, Desi, Village, Bhabhi, and College stories in Hindi.">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://antarvasnapur.in/">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Antarvasnapur - Best Hindi Stories Online">
+<meta property="og:url" content="https://antarvasnapur.in/">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebSite","name":"Antarvasnapur","url":"https://antarvasnapur.in","potentialAction":{"@type":"SearchAction","target":"https://antarvasnapur.in/search.html?q={search_term_string}","query-input":"required name=search_term_string"}}</script>
+<link rel="stylesheet" href="/css/style.css">
+<script src="/js/darkmode.js"></script>
 </head>
-<body>
+<body data-page="home">
+<div id="reading-progress"></div>
+<div class="notice-bar">⚠️ Adult content (18+). By continuing you confirm you are 18 or older.</div>
 
-<div id="progress-bar"></div>
+<!-- Header & Footer injected by layout.js -->
 
-<!-- ════════════════════════════
-     HEADER
-     ════════════════════════════ -->
-<header>
-  <div class="header-inner">
-    <a class="logo" href="/">अंतरवासना <span>पुर</span></a>
-
-    <nav>
-      <a href="/" class="active">होम</a>
-      <a href="/all-stories.html">सभी कहानियाँ</a>
-      <a href="/category.html?cat=desi">देसी</a>
-      <a href="/category.html?cat=romance">रोमांस</a>
-      <a href="/category.html?cat=family">परिवार</a>
-      <a href="/category.html?cat=village">गाँव</a>
-    </nav>
-
-    <div class="header-actions">
-      <button id="darkmode-btn" class="btn-icon" title="डार्क मोड">🌙</button>
-      <button class="hamburger" id="hamburger" aria-label="मेनू" aria-expanded="false">
-        <span></span><span></span><span></span>
-      </button>
+<section class="hero">
+  <div class="hero-content">
+    <h1 class="hero-title">हिंदी कहानियों का संसार</h1>
+    <p class="hero-subtitle">Read the best Hindi stories — romantic, desi, village, bhabhi, and college tales</p>
+    <form class="hero-search" id="hero-search-form" role="search">
+      <input type="search" placeholder="Search in Hindi or English..." aria-label="Search stories">
+      <button type="submit">Search</button>
+    </form>
+    <div class="hero-stats">
+      <div class="hero-stat" id="stories-count"><strong>1000+</strong> Stories</div>
+      <div class="hero-stat"><strong>5</strong> Categories</div>
+      <div class="hero-stat"><strong>Daily</strong> Updates</div>
     </div>
   </div>
-</header>
-
-<!-- Mobile Nav -->
-<nav class="mobile-nav" id="mobile-nav" aria-hidden="true">
-  <a href="/">🏠 होम</a>
-  <a href="/all-stories.html">📚 सभी कहानियाँ</a>
-  <a href="/category.html?cat=desi">🌾 देसी</a>
-  <a href="/category.html?cat=romance">❤️ रोमांस</a>
-  <a href="/category.html?cat=family">👨‍👩‍👧 परिवार</a>
-  <a href="/category.html?cat=village">🏡 गाँव</a>
-  <a href="/category.html?cat=college">🎓 कॉलेज</a>
-  <a href="/category.html?cat=festival">🎉 त्योहार</a>
-  <a href="/search.html">🔍 खोजें</a>
-  <hr style="border:none;border-top:1px solid var(--border);margin:6px 0;">
-  <a href="/about.html">हमारे बारे में</a>
-  <a href="/contact.html">संपर्क</a>
-  <a href="/privacy-policy.html">गोपनीयता नीति</a>
-</nav>
-
-<!-- ════════════════════════════
-     HERO
-     ════════════════════════════ -->
-<section class="hero-v2">
-
-  <div class="hero-top">
-    <div class="hero-badge">✦ हज़ारों कहानियाँ &nbsp;·&nbsp; रोज़ अपडेट</div>
-    <h1>अंतरवासना <em>पुर</em></h1>
-    <p class="hero-sub">हिंदी की सर्वश्रेष्ठ कहानियाँ — देसी, रोमांस, परिवार और बहुत कुछ</p>
-
-    <div class="hero-search-outer">
-      <form class="hero-search-box" id="hero-form" role="search">
-        <input
-          type="search"
-          id="hero-search"
-          placeholder="कहानी खोजें... जैसे: देसी, रोमांस"
-          autocomplete="off"
-          aria-label="कहानी खोजें"
-        >
-        <button type="submit" aria-label="खोजें">
-          <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
-          खोजें
-        </button>
-      </form>
-
-      <div class="hero-chips">
-        <span class="hero-chips-label">जल्दी खोजें:</span>
-        <a class="hero-chip" href="/category.html?cat=desi">देसी</a>
-        <a class="hero-chip" href="/category.html?cat=romance">रोमांस</a>
-        <a class="hero-chip" href="/category.html?cat=village">गाँव</a>
-        <a class="hero-chip" href="/category.html?cat=family">परिवार</a>
-        <a class="hero-chip" href="/category.html?cat=college">कॉलेज</a>
-        <a class="hero-chip" href="/category.html?cat=festival">त्योहार</a>
-      </div>
-    </div>
-  </div>
-
-  <!-- Stats -->
-  <div class="hero-stats">
-    <div class="hero-stats-inner">
-      <div class="stat-item">
-        <div class="stat-icon">📚</div>
-        <div><div class="stat-val">1000+</div><div class="stat-lbl">कहानियाँ</div></div>
-      </div>
-      <div class="stat-item">
-        <div class="stat-icon">📂</div>
-        <div><div class="stat-val">17</div><div class="stat-lbl">श्रेणियाँ</div></div>
-      </div>
-      <div class="stat-item">
-        <div class="stat-icon">👁</div>
-        <div><div class="stat-val">50L+</div><div class="stat-lbl">मासिक पाठक</div></div>
-      </div>
-      <div class="stat-item">
-        <div class="stat-icon">🔥</div>
-        <div><div class="stat-val">रोज़ नई</div><div class="stat-lbl">कहानियाँ जुड़ती हैं</div></div>
-      </div>
-    </div>
-  </div>
-
 </section>
 
-<!-- ════════════════════════════
-     MAIN CONTENT
-     ════════════════════════════ -->
-<div class="container">
-  <div class="layout-grid">
-
-    <main>
-      <section class="mb-8">
-        <div class="section-header">
-          <h2 class="section-title">नवीनतम कहानियाँ</h2>
-          <a class="see-all" href="/all-stories.html">सभी देखें</a>
-        </div>
-        <div class="stories-grid" id="latest-stories">
-          <div class="loading"><div class="spinner"></div>लोड हो रहा है...</div>
-        </div>
-        <div class="pagination" id="latest-pagination"></div>
-      </section>
-
-      <section class="mb-8">
-        <div class="section-header">
-          <h2 class="section-title">🔥 ट्रेंडिंग कहानियाँ</h2>
-        </div>
-        <div id="trending-list">
-          <div class="loading"><div class="spinner"></div>लोड हो रहा है...</div>
-        </div>
-      </section>
-
-      <div id="category-sections">
-        <div class="loading"><div class="spinner"></div>श्रेणियाँ लोड हो रही हैं...</div>
+<main>
+  <div class="container">
+    <div class="home-layout">
+      <!-- Main column -->
+      <div class="home-main">
+        <section class="section">
+          <div class="section-header">
+            <h2 class="section-title">Latest Stories</h2>
+            <a href="/all-stories.html" class="view-all">View All →</a>
+          </div>
+          <div id="latest-stories" class="stories-grid"></div>
+          <div id="latest-pagination" class="pagination"></div>
+        </section>
       </div>
-    </main>
-
-    <aside class="sidebar">
-      <div class="sidebar-widget">
-        <button class="btn-random" data-random>🎲 यादृच्छिक कहानी पढ़ें</button>
-      </div>
-      <div class="sidebar-widget">
-        <h3 class="widget-title">📂 श्रेणियाँ</h3>
-        <ul class="cat-list" id="sidebar-categories">
-          <div class="loading" style="padding:20px 0"><div class="spinner"></div></div>
-        </ul>
-      </div>
-      <div class="sidebar-widget">
-        <h3 class="widget-title">👁 सर्वाधिक पढ़ी गई</h3>
-        <div id="most-viewed-list">
-          <div class="loading" style="padding:20px 0"><div class="spinner"></div></div>
+      <!-- Sidebar -->
+      <aside class="sidebar">
+        <div class="widget">
+          <button class="random-story-btn" data-random-story>🎲 Surprise Me — Random Story</button>
         </div>
-      </div>
-      <div class="sidebar-widget">
-        <h3 class="widget-title">🏷️ लोकप्रिय टैग</h3>
-        <div class="tags-cloud" id="sidebar-tags">
-          <div class="loading" style="padding:20px 0"><div class="spinner"></div></div>
+        <div class="widget">
+          <h3 class="widget-title">🔥 Trending Now</h3>
+          <div id="sidebar-trending"></div>
         </div>
-      </div>
-    </aside>
+        <div class="widget">
+          <h3 class="widget-title">🏷️ Popular Tags</h3>
+          <div id="sidebar-tags"></div>
+        </div>
+      </aside>
+    </div>
 
+    <section class="section">
+      <div class="section-header">
+        <h2 class="section-title">🔥 Trending Stories</h2>
+        <a href="/all-stories.html?sort=trending" class="view-all">View All →</a>
+      </div>
+      <div id="trending-stories"></div>
+    </section>
+
+    <div id="homepage-categories"></div>
+
+    <section class="section">
+      <div class="section-header">
+        <h2 class="section-title">👁️ Most Viewed</h2>
+        <a href="/all-stories.html?sort=views" class="view-all">View All →</a>
+      </div>
+      <div id="most-viewed"></div>
+    </section>
   </div>
-</div>
+</main>
 
-<!-- ════════════════════════════
-     FOOTER
-     ════════════════════════════ -->
-<footer class="footer-v2">
-  <div class="footer-main">
-
-    <div class="footer-brand">
-      <a class="logo" href="/">अंतरवासना पुर</a>
-      <p>हिंदी कहानियों का सबसे बड़ा संग्रह। हर रोज़ नई कहानियाँ, हर श्रेणी में। पढ़ें, सेव करें और अपने पसंदीदा किस्से खोजें।</p>
-      <div class="footer-badge-links">
-        <a class="footer-badge-link" href="/sitemap.html">🗺 साइटमैप</a>
-        <a class="footer-badge-link" href="/search.html">🔍 खोजें</a>
-      </div>
-    </div>
-
-    <div class="footer-col">
-      <h4>श्रेणियाँ</h4>
-      <ul>
-        <li><a href="/category.html?cat=desi">देसी</a></li>
-        <li><a href="/category.html?cat=romance">रोमांस</a></li>
-        <li><a href="/category.html?cat=family">परिवार</a></li>
-        <li><a href="/category.html?cat=village">गाँव</a></li>
-        <li><a href="/category.html?cat=college">कॉलेज</a></li>
-        <li><a href="/category.html?cat=festival">त्योहार</a></li>
-        <li><a href="/category.html?cat=office">ऑफिस</a></li>
-        <li><a href="/all-stories.html">सभी देखें →</a></li>
-      </ul>
-    </div>
-
-    <div class="footer-col">
-      <h4>पेज</h4>
-      <ul>
-        <li><a href="/all-stories.html">सभी कहानियाँ</a></li>
-        <li><a href="/search.html">खोजें</a></li>
-        <li><a href="/sitemap.html">साइटमैप</a></li>
-        <li><a href="/about.html">हमारे बारे में</a></li>
-        <li><a href="/contact.html">संपर्क करें</a></li>
-      </ul>
-    </div>
-
-    <div class="footer-col">
-      <h4>कानूनी</h4>
-      <ul>
-        <li><a href="/privacy-policy.html">गोपनीयता नीति</a></li>
-        <li><a href="/terms.html">उपयोग की शर्तें</a></li>
-        <li><a href="/disclaimer.html">अस्वीकरण</a></li>
-        <li><a href="/dmca.html">DMCA</a></li>
-      </ul>
-    </div>
-
-    <div class="footer-col">
-      <h4>ताज़ा श्रेणियाँ</h4>
-      <ul>
-        <li><a href="/category.html?cat=adventure">एडवेंचर</a></li>
-        <li><a href="/category.html?cat=rajasthani">राजस्थानी</a></li>
-        <li><a href="/category.html?cat=travel">यात्रा</a></li>
-        <li><a href="/category.html?cat=marriage">विवाह</a></li>
-        <li><a href="/category.html?cat=modern">मॉडर्न</a></li>
-        <li><a href="/category.html?cat=drama">नाटक</a></li>
-        <li><a href="/category.html?cat=youth">युवा</a></li>
-      </ul>
-    </div>
-
-  </div>
-
-  <div class="footer-bottom-bar">
-    <div class="footer-bottom-inner">
-      <span>© 2024 AntarVasna Pur. सर्वाधिकार सुरक्षित। &nbsp;|&nbsp; antarvasnapur.in</span>
-      <div class="footer-legal">
-        <a href="/privacy-policy.html">Privacy Policy</a>
-        <a href="/terms.html">Terms &amp; Conditions</a>
-        <a href="/disclaimer.html">Disclaimer</a>
-        <a href="/dmca.html">DMCA</a>
-        <a href="/contact.html">Contact</a>
-      </div>
-    </div>
-  </div>
-</footer>
-
-<button id="back-to-top" title="ऊपर जाएं">↑</button>
-
+<script src="/js/layout.js"></script>
 <script src="/js/main.js"></script>
-<script src="/js/darkmode.js"></script>
-<script src="/js/progress.js"></script>
 <script src="/js/pagination.js"></script>
-<script src="/js/random.js"></script>
 <script src="/js/trending.js"></script>
 <script src="/js/categories.js"></script>
-<script src="/js/tags.js"></script>
+<script src="/js/progress.js"></script>
 <script src="/js/analytics.js"></script>
-
 <script>
-// ── Hamburger ──
-const hamburger = document.getElementById('hamburger');
-const mobileNav = document.getElementById('mobile-nav');
-
-hamburger.addEventListener('click', e => {
-  e.stopPropagation();
-  const isOpen = mobileNav.classList.toggle('open');
-  hamburger.setAttribute('aria-expanded', String(isOpen));
-  mobileNav.setAttribute('aria-hidden', String(!isOpen));
-});
-mobileNav.querySelectorAll('a').forEach(a => {
-  a.addEventListener('click', () => {
-    mobileNav.classList.remove('open');
-    hamburger.setAttribute('aria-expanded', 'false');
+document.addEventListener('DOMContentLoaded', async () => {
+  const stories = await window.SITE.loadStories();
+  const countEl = document.getElementById('stories-count');
+  if (countEl) countEl.innerHTML = '<strong>' + stories.length + '+</strong> Stories';
+  const latest = window.SITE.getLatest(stories, stories.length);
+  window.paginator_latest_stories = new Paginator({
+    containerId:'latest-stories', paginationId:'latest-pagination',
+    items:latest, perPage:10, renderFn:s=>window.SITE.buildStoryCard(s)
   });
-});
-document.addEventListener('click', e => {
-  if (!hamburger.contains(e.target) && !mobileNav.contains(e.target)) {
-    mobileNav.classList.remove('open');
-    hamburger.setAttribute('aria-expanded', 'false');
-  }
-});
-
-// ── Hero search ──
-document.getElementById('hero-form').addEventListener('submit', e => {
-  e.preventDefault();
-  const q = document.getElementById('hero-search').value.trim();
-  if (q) window.location.href = '/search.html?q=' + encodeURIComponent(q);
-});
-
-// ── Latest stories ──
-async function buildLatestWithPagination() {
-  const data = await window.APP.loadStories();
-  const sorted = [...data.stories].sort((a, b) => new Date(b.date) - new Date(a.date));
-  createPagination(sorted, 10, window.APP.storyCardHTML, 'latest-stories', 'latest-pagination');
-}
-
-// ── Category preview sections ──
-async function buildCategorySections() {
-  const data = await window.APP.loadStories();
-  const el = document.getElementById('category-sections');
-  if (!el) return;
-  const showCats = ['desi', 'romance', 'family', 'village'];
-  let html = '';
-  for (const catId of showCats) {
-    const catInfo = data.categories.find(c => c.id === catId);
-    if (!catInfo) continue;
-    const stories = data.stories.filter(s => (s.categories || []).includes(catId)).slice(0, 5);
-    if (!stories.length) continue;
-    html += `<section class="mb-8">
-      <div class="section-header">
-        <h2 class="section-title">${catInfo.name} कहानियाँ</h2>
-        <a class="see-all" href="/category.html?cat=${catId}">सभी देखें</a>
-      </div>
-      <div class="cards-grid">${stories.map(s => window.APP.smallCardHTML(s)).join('')}</div>
-    </section>`;
-  }
-  el.innerHTML = html;
-}
-
-document.addEventListener('DOMContentLoaded', () => {
-  buildLatestWithPagination();
-  buildCategorySections();
+  window.paginator_latest_stories.render();
 });
 </script>
-
 </body>
 </html>

@@ -1,0 +1,15 @@
+https://www.antarvasnapur.in/*  https://antarvasnapur.in/:splat  301
+http://antarvasnapur.in/*       https://antarvasnapur.in/:splat  301
+/index.html                     /                                 301
+/about                          /about.html                       200
+/contact                        /contact.html                     200
+/privacy-policy                 /privacy-policy.html              200
+/disclaimer                     /disclaimer.html                  200
+/terms                          /terms.html                       200
+/dmca                           /dmca.html                        200
+/all-stories                    /all-stories.html                 200
+/category                       /category.html                    200
+/tag                             /tag.html                         200
+/search                         /search.html                      200
+/sitemap                        /sitemap.html                     200
+/stories                        /all-stories.html                 301

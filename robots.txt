@@ -1,9 +1,5 @@
 User-agent: *
 Allow: /
-
-# Disallow admin or private areas (if any in future)
-Disallow: /admin/
-Disallow: /private/
-
-# Sitemap location
+Disallow: /search.html?q=
 Sitemap: https://antarvasnapur.in/sitemap.xml
+Crawl-delay: 1
