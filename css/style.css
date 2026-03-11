@@ -60,12 +60,41 @@ button{font-family:inherit;cursor:pointer}
   max-width:var(--max);margin:0 auto;padding:0 14px;
   height:100%;display:flex;align-items:center;gap:10px;
 }
+/* ── Logo — new design ── */
 .site-logo{
-  font-family:var(--fd);font-size:1.28rem;font-weight:700;
-  color:var(--primary);white-space:nowrap;flex-shrink:0;line-height:1;
+  display:inline-flex;align-items:center;gap:7px;
+  white-space:nowrap;flex-shrink:0;line-height:1;
+  text-decoration:none;
 }
-.site-logo span{color:var(--accent)}
-.site-logo:hover{color:var(--primary)}
+.logo-icon{
+  font-size:1.5rem;line-height:1;
+  display:flex;align-items:center;
+  filter:drop-shadow(0 1px 2px rgba(0,0,0,.15));
+  transition:transform .3s ease;
+}
+.site-logo:hover .logo-icon{transform:rotate(-8deg) scale(1.1)}
+.logo-text{
+  font-family:var(--fd);line-height:1;
+  display:flex;align-items:baseline;gap:0;
+}
+.logo-a{
+  font-size:1.22rem;font-weight:700;
+  color:var(--primary);letter-spacing:-.01em;
+}
+.logo-b{
+  font-size:1.22rem;font-weight:400;font-style:italic;
+  color:var(--accent);letter-spacing:-.01em;
+}
+.site-logo:hover .logo-a{color:var(--primary-l)}
+.site-logo:hover .logo-b{color:var(--primary)}
+
+/* Footer logo slightly larger */
+.footer-logo .logo-a,.footer-logo .logo-b{font-size:1.4rem}
+.footer-logo .logo-icon{font-size:1.7rem}
+
+@media(min-width:768px){
+  .logo-a,.logo-b{font-size:1.38rem}
+}
 
 /* Nav — hidden mobile, flex desktop */
 .header-nav{display:none;align-items:center;gap:2px;flex:1}
@@ -87,7 +116,6 @@ button{font-family:inherit;cursor:pointer}
 @media(min-width:768px){
   :root{--hh:64px}
   .header-inner{padding:0 20px;gap:14px}
-  .site-logo{font-size:1.5rem}
   .header-nav{display:flex}
   .header-search{display:block}
   .hamburger{display:none}
@@ -311,8 +339,11 @@ button{font-family:inherit;cursor:pointer}
 .site-footer{background:var(--bg-card);border-top:1px solid var(--border);margin-top:52px}
 .footer-main{max-width:var(--max);margin:0 auto;padding:32px 14px 22px;display:grid;grid-template-columns:1fr 1fr;gap:22px}
 .footer-brand{grid-column:1/-1}
-.footer-brand .site-logo{font-size:1.25rem;margin-bottom:9px;display:block}
-.footer-brand p{font-size:.82rem;color:var(--text-m);line-height:1.65;font-family:var(--fh)}
+.footer-brand .site-logo{margin-bottom:10px;display:inline-flex}
+.footer-tagline{font-family:var(--fh);font-size:.9rem;font-weight:600;color:var(--text);margin-bottom:5px}
+.footer-desc{font-size:.8rem;color:var(--text-m);line-height:1.65;font-family:var(--fh);margin-bottom:12px}
+.footer-badges{display:flex;gap:7px;flex-wrap:wrap}
+.footer-badge{display:inline-flex;align-items:center;gap:4px;font-size:.7rem;padding:3px 9px;border-radius:11px;background:var(--bg-sec);border:1px solid var(--border);color:var(--text-m);font-weight:500}
 .footer-col h4{font-size:.77rem;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--text);margin-bottom:11px}
 .footer-col ul li{margin-bottom:8px}
 .footer-col ul li a{font-size:.82rem;color:var(--text-m);transition:color var(--ease)}
