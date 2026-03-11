@@ -46,7 +46,10 @@
     header.className = 'site-header';
     header.innerHTML = `
       <div class="header-inner">
-        <a href="/index.html" class="site-logo">Antarvas<span>napur</span></a>
+        <a href="/index.html" class="site-logo" aria-label="Antarvasnapur Home">
+          <span class="logo-icon">📖</span>
+          <span class="logo-text"><span class="logo-a">Antarvas</span><span class="logo-b">napur</span></span>
+        </a>
         <nav class="header-nav" aria-label="Main navigation">${navHTML}</nav>
         <div class="header-search">
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
@@ -72,15 +75,18 @@
       <div class="mobile-menu-overlay"></div>
       <div class="mobile-menu-panel">
         <div class="mobile-menu-header">
-          <a href="/index.html" class="site-logo">Antarvas<span>napur</span></a>
+          <a href="/index.html" class="site-logo" aria-label="Antarvasnapur Home">
+            <span class="logo-icon">📖</span>
+            <span class="logo-text"><span class="logo-a">Antarvas</span><span class="logo-b">napur</span></span>
+          </a>
           <button class="mobile-menu-close" id="mobile-menu-close" aria-label="Close menu">
             <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
           </button>
         </div>
         <div class="mobile-search-wrap" style="margin-bottom:14px;position:relative">
-          <svg xmlns="http://www.w3.org/2000/svg" style="position:absolute;left:10px;top:50%;transform:translateY(-50%);color:var(--text-light);width:14px;height:14px;pointer-events:none" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+          <svg xmlns="http://www.w3.org/2000/svg" style="position:absolute;left:10px;top:50%;transform:translateY(-50%);color:var(--text-l);width:14px;height:14px;pointer-events:none" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
           <input id="mobile-search-input" type="search" placeholder="Search stories..." autocomplete="off"
-            style="width:100%;padding:9px 13px 9px 32px;border:1px solid var(--border);border-radius:20px;background:var(--bg-secondary);color:var(--text);font-size:0.88rem;outline:none;font-family:var(--font-hindi)">
+            style="width:100%;padding:9px 13px 9px 32px;border:1px solid var(--border);border-radius:20px;background:var(--bg-sec);color:var(--text);font-size:0.88rem;outline:none;font-family:var(--fh)"
         </div>
         <nav class="mobile-nav" aria-label="Mobile navigation">${mobileNavHTML}</nav>
       </div>`;
@@ -109,8 +115,17 @@
     footer.innerHTML = `
       <div class="footer-main">
         <div class="footer-brand">
-          <a href="/index.html" class="site-logo">Antarvas<span>napur</span></a>
-          <p>सर्वश्रेष्ठ हिंदी कहानियाँ पढ़ें। रोमांटिक, देसी, गाँव, भाभी और कॉलेज कहानियों का अनोखा संग्रह।</p>
+          <a href="/index.html" class="site-logo footer-logo" aria-label="Antarvasnapur Home">
+            <span class="logo-icon">📖</span>
+            <span class="logo-text"><span class="logo-a">Antarvas</span><span class="logo-b">napur</span></span>
+          </a>
+          <p class="footer-tagline">हिंदी कहानियों का सबसे बड़ा संग्रह</p>
+          <p class="footer-desc">Read the best romantic, desi, village, bhabhi, and college stories in Hindi. New stories added daily.</p>
+          <div class="footer-badges">
+            <span class="footer-badge">🔞 Adults 18+ Only</span>
+            <span class="footer-badge">📖 1000+ Stories</span>
+            <span class="footer-badge">🆓 Free Forever</span>
+          </div>
         </div>
         <div class="footer-col">
           <h4>Stories</h4>
