@@ -99,11 +99,14 @@ document.addEventListener('DOMContentLoaded', async () => {
   const countEl = document.getElementById('stories-count');
   if (countEl) countEl.innerHTML = '<strong>' + stories.length + '+</strong> Stories';
   const latest = window.SITE.getLatest(stories, stories.length);
-  window.paginator_latest_stories = new Paginator({
-    containerId:'latest-stories', paginationId:'latest-pagination',
-    items:latest, perPage:10, renderFn:s=>window.SITE.buildStoryCard(s)
+  const pager = new Paginator({
+    containerId:  'latest-stories',
+    paginationId: 'latest-pagination',
+    items:        latest,
+    perPage:      10,
+    renderFn:     s => window.SITE.buildStoryCard(s)
   });
-  window.paginator_latest_stories.render();
+  pager.render();
 });
 </script>
 </body>

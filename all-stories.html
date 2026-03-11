@@ -3,49 +3,118 @@
 <head>
 <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>All Stories - Antarvasnapur | सभी कहानियाँ</title>
-<meta name="description" content="Browse all Hindi stories on Antarvasnapur.">
+<meta name="description" content="Browse all Hindi stories on Antarvasnapur — romantic, desi, village, bhabhi and college stories.">
 <meta name="robots" content="index, follow">
-<link rel="canonical" href="https://antarvasnapur.in/all-stories.html">
+<link rel="canonical" href="https://www.antarvasnapur.in/all-stories.html">
 <link rel="stylesheet" href="/css/style.css">
 <script src="/js/darkmode.js"></script>
 </head>
 <body data-page="all-stories">
 <div id="reading-progress"></div>
 <div class="notice-bar">⚠️ Adult content (18+). By continuing you confirm you are 18+.</div>
-<div class="page-banner"><h1>All Stories</h1><p>Browse our complete collection of Hindi stories</p></div>
+<div class="page-banner"><h1>All Stories</h1><p id="stories-total">Browse our complete collection of Hindi stories</p></div>
+
 <main class="container" style="padding-bottom:60px">
-  <div style="display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin-top:24px;margin-bottom:14px">
-    <span style="font-size:.8rem;color:var(--text-m);font-weight:600;white-space:nowrap">Sort by:</span>
+
+  <!-- Sort buttons -->
+  <div style="display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin-top:24px;margin-bottom:12px">
+    <span style="font-size:.8rem;color:var(--text-m);font-weight:600;white-space:nowrap">Sort:</span>
     <button class="cat-filter-btn active" data-sort="latest">Latest</button>
     <button class="cat-filter-btn" data-sort="trending">Trending</button>
     <button class="cat-filter-btn" data-sort="views">Most Viewed</button>
     <button class="cat-filter-btn" data-sort="rating">Top Rated</button>
   </div>
+
+  <!-- Category filter -->
   <div class="categories-filter" id="cat-filter-bar"></div>
+
+  <!-- Grid -->
   <div id="all-stories-grid" class="stories-grid"></div>
+
+  <!-- Pagination -->
   <div id="all-stories-pagination" class="pagination"></div>
+
 </main>
+
 <script src="/js/layout.js"></script>
 <script src="/js/main.js"></script>
 <script src="/js/pagination.js"></script>
 <script src="/js/progress.js"></script>
 <script src="/js/analytics.js"></script>
 <script>
-let allStories=[], activeSort='latest', activeCat='', pager;
-function getSorted(s,sort){const a=[...s];if(sort==='views'||sort==='trending')return a.sort((a,b)=>b.views-a.views);if(sort==='rating')return a.sort((a,b)=>b.rating-a.rating);return a.sort((a,b)=>new Date(b.date)-new Date(a.date));}
-function applyFilters(){let f=allStories;if(activeCat)f=f.filter(s=>(s.categories||[]).includes(activeCat));pager.setItems(getSorted(f,activeSort));}
-document.addEventListener('DOMContentLoaded', async()=>{
-  allStories=await window.SITE.loadStories();
-  const cats=window.SITE.extractCategories(allStories);
-  const bar=document.getElementById('cat-filter-bar');
-  if(bar){bar.innerHTML='<button class="cat-filter-btn active" data-cat="">All</button>'+cats.map(([c])=>`<button class="cat-filter-btn" data-cat="${c}">${c}</button>`).join('');
-  bar.querySelectorAll('[data-cat]').forEach(btn=>btn.addEventListener('click',()=>{bar.querySelectorAll('[data-cat]').forEach(b=>b.classList.remove('active'));btn.classList.add('active');activeCat=btn.dataset.cat;applyFilters();}));}
-  pager=new Paginator({containerId:'all-stories-grid',paginationId:'all-stories-pagination',items:[],perPage:12,renderFn:s=>window.SITE.buildStoryCard(s)});
-  applyFilters();
-  document.querySelectorAll('[data-sort]').forEach(btn=>btn.addEventListener('click',()=>{document.querySelectorAll('[data-sort]').forEach(b=>b.classList.remove('active'));btn.classList.add('active');activeSort=btn.dataset.sort;applyFilters();}));
-  const urlSort=new URLSearchParams(window.location.search).get('sort');
-  if(urlSort){const b=document.querySelector(`[data-sort="${urlSort}"]`);if(b)b.click();}
-});
+(function () {
+  'use strict';
+
+  let allStories = [];
+  let activeSort = 'latest';
+  let activeCat  = '';
+  let pager;
+
+  function getSorted(stories, sort) {
+    const a = [...stories];
+    if (sort === 'views' || sort === 'trending') return a.sort((a, b) => b.views - a.views);
+    if (sort === 'rating') return a.sort((a, b) => b.rating - a.rating);
+    return a.sort((a, b) => new Date(b.date) - new Date(a.date));
+  }
+
+  function applyFilters() {
+    let filtered = activeCat
+      ? allStories.filter(s => (s.categories || []).includes(activeCat))
+      : allStories;
+    pager.setItems(getSorted(filtered, activeSort));
+    const totalEl = document.getElementById('stories-total');
+    if (totalEl) totalEl.textContent = filtered.length + ' stories';
+  }
+
+  document.addEventListener('DOMContentLoaded', async () => {
+    allStories = await window.SITE.loadStories();
+
+    /* Build category filter bar */
+    const bar = document.getElementById('cat-filter-bar');
+    if (bar) {
+      const cats = window.SITE.extractCategories(allStories);
+      bar.innerHTML = '<button class="cat-filter-btn active" data-cat="">All</button>' +
+        cats.map(([c]) => `<button class="cat-filter-btn" data-cat="${c}">${c}</button>`).join('');
+
+      bar.addEventListener('click', e => {
+        const btn = e.target.closest('[data-cat]');
+        if (!btn) return;
+        bar.querySelectorAll('[data-cat]').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        activeCat = btn.dataset.cat;
+        applyFilters();
+      });
+    }
+
+    /* Sort buttons */
+    document.querySelectorAll('[data-sort]').forEach(btn => {
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('[data-sort]').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        activeSort = btn.dataset.sort;
+        applyFilters();
+      });
+    });
+
+    /* Create paginator */
+    pager = new Paginator({
+      containerId:  'all-stories-grid',
+      paginationId: 'all-stories-pagination',
+      items:        [],
+      perPage:      12,
+      renderFn:     s => window.SITE.buildStoryCard(s)
+    });
+
+    /* Apply URL param for sort */
+    const urlSort = new URLSearchParams(window.location.search).get('sort');
+    if (urlSort) {
+      const btn = document.querySelector(`[data-sort="${urlSort}"]`);
+      if (btn) { btn.dispatchEvent(new Event('click')); return; }
+    }
+
+    applyFilters();
+  });
+})();
 </script>
 </body>
 </html>
