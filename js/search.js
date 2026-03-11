@@ -1,57 +1,35 @@
-// search.js — Search functionality
-
-async function initSearch() {
-  const data = await window.APP.loadStories();
-  const q = new URLSearchParams(window.location.search).get('q') || '';
-  const input = document.getElementById('search-input');
-  if (input) input.value = q;
-
+/* search.js */
+document.addEventListener('DOMContentLoaded', async () => {
+  const searchForm = document.getElementById('search-form');
+  const searchInput = document.getElementById('search-input');
   const resultsEl = document.getElementById('search-results');
-  const countEl = document.getElementById('result-count');
-  const queryEl = document.getElementById('search-query');
+  const countEl = document.getElementById('search-count');
+  if (!searchForm || !resultsEl) return;
 
-  if (queryEl) queryEl.textContent = q;
+  const stories = await window.SITE.loadStories();
 
-  if (!q.trim()) {
-    if (resultsEl) resultsEl.innerHTML = '<p class="text-muted" style="padding:40px 0;text-align:center">कोई खोज शब्द दर्ज करें...</p>';
-    return;
+  function doSearch(q) {
+    if (!q) { resultsEl.innerHTML=''; if(countEl) countEl.textContent=''; return; }
+    const ql = q.toLowerCase();
+    const scored = stories.map(s => {
+      let score = 0;
+      if (s.title.toLowerCase().includes(ql)) score += 10;
+      if ((s.excerpt||'').toLowerCase().includes(ql)) score += 3;
+      if ((s.categories||[]).some(c=>c.toLowerCase().includes(ql))) score += 2;
+      if ((s.tags||[]).some(t=>t.toLowerCase().includes(ql))) score += 2;
+      return { s, score };
+    }).filter(x=>x.score>0).sort((a,b)=>b.score-a.score);
+    if (countEl) countEl.innerHTML = `Found <strong>${scored.length}</strong> result${scored.length!==1?'s':''} for <strong>"${q}"</strong>`;
+    resultsEl.innerHTML = scored.length
+      ? `<div class="stories-grid">${scored.map(x=>window.SITE.buildStoryCard(x.s)).join('')}</div>`
+      : `<div class="no-results"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg><h3>No stories found for "${q}"</h3><p>Try different keywords or browse categories.</p></div>`;
   }
 
-  const term = q.toLowerCase();
-  const results = data.stories.filter(s => {
-    return (
-      s.title.toLowerCase().includes(term) ||
-      (s.tags || []).some(t => t.toLowerCase().includes(term)) ||
-      (s.categories || []).some(c => c.toLowerCase().includes(term)) ||
-      (s.excerpt || '').toLowerCase().includes(term)
-    );
-  });
+  const params = new URLSearchParams(window.location.search);
+  const initial = params.get('q') || '';
+  if (initial && searchInput) { searchInput.value = initial; doSearch(initial); }
 
-  if (countEl) countEl.textContent = results.length;
-
-  if (!resultsEl) return;
-
-  if (results.length === 0) {
-    resultsEl.innerHTML = `<div class="bookmarks-empty"><div class="icon">🔍</div><p>"${q}" के लिए कोई परिणाम नहीं मिला।</p></div>`;
-    return;
-  }
-
-  createPagination(results, 10, window.APP.storyCardHTML, 'search-results', 'search-pagination');
-}
-
-// Header search form handler
-document.addEventListener('DOMContentLoaded', () => {
-  const forms = document.querySelectorAll('.search-form');
-  forms.forEach(form => {
-    form.addEventListener('submit', e => {
-      e.preventDefault();
-      const q = form.querySelector('input').value.trim();
-      if (q) window.location.href = `/search.html?q=${encodeURIComponent(q)}`;
-    });
-  });
-
-  // Init search page
-  if (document.getElementById('search-results')) {
-    initSearch();
-  }
+  searchForm.addEventListener('submit', e => { e.preventDefault(); doSearch(searchInput.value.trim()); });
+  let timer;
+  searchInput?.addEventListener('input', () => { clearTimeout(timer); timer = setTimeout(()=>doSearch(searchInput.value.trim()), 300); });
 });

@@ -1,26 +1,14 @@
-// analytics.js — Google Analytics placeholder
-
-// Replace G-XXXXXXXXXX with your actual Google Analytics Measurement ID
-(function() {
-  var GA_ID = 'G-XXXXXXXXXX';
-
-  // Load GA script
-  var script = document.createElement('script');
-  script.async = true;
-  script.src = 'https://www.googletagmanager.com/gtag/js?id=' + GA_ID;
-  document.head.appendChild(script);
-
+/* analytics.js — replace GA_MEASUREMENT_ID with your real GA4 ID */
+(function(){
+  const GA_ID = 'GA_MEASUREMENT_ID';
+  if (!GA_ID || GA_ID === 'GA_MEASUREMENT_ID') return;
+  const s = document.createElement('script');
+  s.async = true;
+  s.src = 'https://www.googletagmanager.com/gtag/js?id=' + GA_ID;
+  document.head.appendChild(s);
   window.dataLayer = window.dataLayer || [];
-  function gtag() { dataLayer.push(arguments); }
-  window.gtag = gtag;
+  function gtag(){dataLayer.push(arguments);}
   gtag('js', new Date());
   gtag('config', GA_ID);
-
-  // Track story page views
-  if (window.STORY_SLUG) {
-    gtag('event', 'story_view', {
-      story_slug: window.STORY_SLUG,
-      story_title: window.STORY_TITLE || ''
-    });
-  }
+  window.gtag = gtag;
 })();

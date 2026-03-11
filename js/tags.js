@@ -1,40 +1,25 @@
-// tags.js — Tag page logic
-
-async function initTagPage() {
-  const data = await window.APP.loadStories();
-  const tag = new URLSearchParams(window.location.search).get('tag') || '';
-
-  const titleEl = document.getElementById('tag-title');
-  const descEl = document.getElementById('tag-desc');
-  if (titleEl) titleEl.textContent = '#' + tag;
-  if (descEl) descEl.textContent = `"${tag}" टैग वाली सभी कहानियाँ`;
-
-  const filtered = data.stories.filter(s => (s.tags || []).includes(tag));
-
-  const resultsEl = document.getElementById('tag-results');
-  if (!resultsEl) return;
-
-  if (filtered.length === 0) {
-    resultsEl.innerHTML = `<div class="bookmarks-empty"><div class="icon">🏷️</div><p>इस टैग में कोई कहानी नहीं है।</p></div>`;
-    return;
+/* tags.js */
+document.addEventListener('DOMContentLoaded', async () => {
+  if (typeof window.SITE === 'undefined') return;
+  const tagPageEl = document.getElementById('tag-page-content');
+  if (!tagPageEl) return;
+  const stories = await window.SITE.loadStories();
+  const params = new URLSearchParams(window.location.search);
+  const tag = params.get('t');
+  if (tag) {
+    const filtered = stories.filter(s=>(s.tags||[]).includes(tag));
+    document.title = '#' + tag + ' — Antarvasnapur';
+    const banner = document.getElementById('page-banner-title');
+    const bannerSub = document.getElementById('page-banner-sub');
+    if (banner) banner.textContent = '#' + tag;
+    if (bannerSub) bannerSub.textContent = filtered.length + ' stories';
+    tagPageEl.innerHTML = `<div class="stories-grid">${filtered.map(s=>window.SITE.buildStoryCard(s)).join('')}</div>`;
+  } else {
+    const tags = window.SITE.extractTags(stories);
+    const max = tags[0]?.[1] || 1;
+    tagPageEl.innerHTML = `<div class="tags-cloud" style="gap:10px">${tags.map(([t,count])=>{
+      const size = 0.8 + (count/max)*0.9;
+      return `<a href="/tag.html?t=${encodeURIComponent(t)}" class="tag-cloud-item" style="font-size:${size.toFixed(2)}rem">${t} <sup>${count}</sup></a>`;
+    }).join('')}</div>`;
   }
-
-  createPagination(filtered, 10, window.APP.storyCardHTML, 'tag-results', 'tag-pagination');
-}
-
-// Build tags cloud
-async function buildTagsCloud(containerId) {
-  const data = await window.APP.loadStories();
-  const el = document.getElementById(containerId);
-  if (!el) return;
-  el.innerHTML = data.tags.slice(0, 30).map(t =>
-    `<a href="/tag.html?tag=${t}">#${t}</a>`
-  ).join('');
-}
-
-document.addEventListener('DOMContentLoaded', () => {
-  if (document.getElementById('tag-results')) initTagPage();
-  if (document.getElementById('sidebar-tags')) buildTagsCloud('sidebar-tags');
 });
-
-window.buildTagsCloud = buildTagsCloud;

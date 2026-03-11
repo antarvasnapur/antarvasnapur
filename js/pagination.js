@@ -1,57 +1,40 @@
-// pagination.js — Generic client-side pagination
-
-function createPagination(items, perPage, renderFn, containerId, paginationId) {
-  const container = document.getElementById(containerId);
-  const paginationEl = document.getElementById(paginationId);
-  if (!container) return;
-
-  let currentPage = 1;
-  const totalPages = Math.ceil(items.length / perPage);
-
-  function render() {
-    const start = (currentPage - 1) * perPage;
-    const slice = items.slice(start, start + perPage);
-    container.innerHTML = slice.map(renderFn).join('');
-    renderPagination();
-    window.scrollTo({ top: container.offsetTop - 80, behavior: 'smooth' });
+/* pagination.js */
+'use strict';
+class Paginator {
+  constructor({ containerId, paginationId, items=[], perPage=10, renderFn }) {
+    this.containerId = containerId;
+    this.paginationId = paginationId;
+    this.items = items;
+    this.perPage = perPage;
+    this.renderFn = renderFn;
+    this.page = 1;
   }
-
-  function renderPagination() {
-    if (!paginationEl || totalPages <= 1) return;
-    let html = '';
-
-    html += `<button class="page-btn" onclick="changePage(${currentPage - 1})" ${currentPage === 1 ? 'disabled' : ''}>‹ पिछला</button>`;
-
-    const range = getPageRange(currentPage, totalPages);
-    range.forEach(p => {
-      if (p === '...') {
-        html += `<span class="page-btn" style="cursor:default;color:var(--text-light)">…</span>`;
-      } else {
-        html += `<button class="page-btn ${p === currentPage ? 'active' : ''}" onclick="changePage(${p})">${p}</button>`;
+  setItems(items) { this.items = items; this.page = 1; this.render(); }
+  goTo(p) { this.page = p; this.render(); window.scrollTo({top:0,behavior:'smooth'}); }
+  render() {
+    const el = document.getElementById(this.containerId);
+    if (!el) return;
+    const start = (this.page-1)*this.perPage;
+    const slice = this.items.slice(start, start+this.perPage);
+    el.innerHTML = slice.length ? slice.map(this.renderFn).join('') :
+      `<div class="empty-state"><div class="empty-state-icon">📭</div><h3>No stories found</h3></div>`;
+    this.renderPagination();
+  }
+  renderPagination() {
+    const el = document.getElementById(this.paginationId);
+    if (!el) return;
+    const total = Math.ceil(this.items.length / this.perPage);
+    if (total <= 1) { el.innerHTML=''; return; }
+    let html = `<button class="page-btn" onclick="this.closest('[id]');paginator_${this.containerId}.goTo(${this.page-1})" ${this.page===1?'disabled':''}>‹</button>`;
+    for (let i=1; i<=total; i++) {
+      if (i===1||i===total||Math.abs(i-this.page)<=1) {
+        html += `<button class="page-btn${i===this.page?' active':''}" onclick="paginator_${this.containerId}.goTo(${i})">${i}</button>`;
+      } else if (Math.abs(i-this.page)===2) {
+        html += `<span class="page-btn" style="cursor:default;border:none">…</span>`;
       }
-    });
-
-    html += `<button class="page-btn" onclick="changePage(${currentPage + 1})" ${currentPage === totalPages ? 'disabled' : ''}>अगला ›</button>`;
-    paginationEl.innerHTML = html;
+    }
+    html += `<button class="page-btn" onclick="paginator_${this.containerId}.goTo(${this.page+1})" ${this.page===total?'disabled':''}>›</button>`;
+    el.innerHTML = html;
   }
-
-  function getPageRange(current, total) {
-    if (total <= 7) return Array.from({ length: total }, (_, i) => i + 1);
-    const range = [1];
-    if (current > 3) range.push('...');
-    for (let i = Math.max(2, current - 1); i <= Math.min(total - 1, current + 1); i++) range.push(i);
-    if (current < total - 2) range.push('...');
-    range.push(total);
-    return range;
-  }
-
-  window.changePage = function (page) {
-    if (page < 1 || page > totalPages) return;
-    currentPage = page;
-    render();
-  };
-
-  render();
 }
-
-window.createPagination = createPagination;
+window.Paginator = Paginator;

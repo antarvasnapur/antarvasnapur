@@ -1,21 +1,10 @@
-// related.js — Related stories for story pages
-
-async function buildRelated(currentSlug, categories, containerId, limit = 4) {
-  const data = await window.APP.loadStories();
-  const el = document.getElementById(containerId);
-  if (!el) return;
-
-  const related = data.stories
-    .filter(s => s.slug !== currentSlug && (s.categories || []).some(c => categories.includes(c)))
-    .sort(() => Math.random() - 0.5)
-    .slice(0, limit);
-
-  if (related.length === 0) {
-    el.innerHTML = '<p class="text-muted">कोई संबंधित कहानी नहीं मिली।</p>';
-    return;
-  }
-
-  el.innerHTML = `<div class="related-grid">${related.map(s => window.APP.smallCardHTML(s)).join('')}</div>`;
-}
-
-window.buildRelated = buildRelated;
+/* related.js */
+document.addEventListener('DOMContentLoaded', async () => {
+  const el = document.getElementById('related-stories');
+  if (!el || typeof window.SITE === 'undefined') return;
+  const storyId = parseInt(document.body.dataset.storyId);
+  const stories = await window.SITE.loadStories();
+  const current = stories.find(s=>s.id===storyId);
+  const related = window.SITE.getRelated(stories, current, 6);
+  el.innerHTML = `<div class="stories-grid">${related.map(s=>window.SITE.buildStoryCard(s)).join('')}</div>`;
+});

@@ -1,40 +1,47 @@
-// categories.js — Category page logic
+/* categories.js */
+document.addEventListener('DOMContentLoaded', async () => {
+  if (typeof window.SITE === 'undefined') return;
 
-async function initCategoryPage() {
-  const data = await window.APP.loadStories();
-  const cat = new URLSearchParams(window.location.search).get('cat') || '';
-
-  const titleEl = document.getElementById('cat-title');
-  const descEl = document.getElementById('cat-desc');
-  if (titleEl) titleEl.textContent = cat.charAt(0).toUpperCase() + cat.slice(1);
-  if (descEl) descEl.textContent = `"${cat}" श्रेणी की सभी कहानियाँ`;
-
-  const filtered = data.stories.filter(s => (s.categories || []).includes(cat));
-
-  const resultsEl = document.getElementById('category-results');
-  if (!resultsEl) return;
-
-  if (filtered.length === 0) {
-    resultsEl.innerHTML = `<div class="bookmarks-empty"><div class="icon">📂</div><p>इस श्रेणी में कोई कहानी नहीं है।</p></div>`;
-    return;
+  // Homepage category sections
+  const homeCatsEl = document.getElementById('homepage-categories');
+  if (homeCatsEl) {
+    const stories = await window.SITE.loadStories();
+    const cats = window.SITE.extractCategories(stories);
+    homeCatsEl.innerHTML = cats.map(([cat]) => {
+      const catStories = stories.filter(s=>(s.categories||[]).includes(cat)).slice(0,6);
+      if (!catStories.length) return '';
+      return `<section class="section">
+        <div class="section-header">
+          <h2 class="section-title">${cat}</h2>
+          <a href="/category.html?c=${encodeURIComponent(cat)}" class="view-all">View All →</a>
+        </div>
+        <div class="stories-grid">${catStories.map(s=>window.SITE.buildStoryCard(s)).join('')}</div>
+      </section>`;
+    }).join('');
   }
 
-  createPagination(filtered, 10, window.APP.storyCardHTML, 'category-results', 'cat-pagination');
-}
-
-// Build category list in sidebar
-async function buildCategoryList(containerId) {
-  const data = await window.APP.loadStories();
-  const el = document.getElementById(containerId);
-  if (!el) return;
-  el.innerHTML = data.categories.slice(0, 12).map(c =>
-    `<li><a href="/category.html?cat=${c.id}">${c.name} <span class="count">${c.count}</span></a></li>`
-  ).join('');
-}
-
-document.addEventListener('DOMContentLoaded', () => {
-  if (document.getElementById('category-results')) initCategoryPage();
-  if (document.getElementById('sidebar-categories')) buildCategoryList('sidebar-categories');
+  // Category page
+  const catPageEl = document.getElementById('category-page-content');
+  if (catPageEl) {
+    const stories = await window.SITE.loadStories();
+    const params = new URLSearchParams(window.location.search);
+    const cat = params.get('c');
+    if (cat) {
+      const filtered = stories.filter(s=>(s.categories||[]).includes(cat));
+      document.title = cat + ' — Antarvasnapur';
+      const banner = document.getElementById('page-banner-title');
+      const bannerSub = document.getElementById('page-banner-sub');
+      if (banner) banner.textContent = cat;
+      if (bannerSub) bannerSub.textContent = filtered.length + ' stories';
+      catPageEl.innerHTML = `<div class="stories-grid">${filtered.map(s=>window.SITE.buildStoryCard(s)).join('')}</div>`;
+    } else {
+      const cats = window.SITE.extractCategories(stories);
+      catPageEl.innerHTML = `<div class="categories-grid">${cats.map(([c,count])=>`
+        <a href="/category.html?c=${encodeURIComponent(c)}" class="category-card">
+          <div class="category-icon">📖</div>
+          <div class="category-name">${c}</div>
+          <div class="category-count">${count} stories</div>
+        </a>`).join('')}</div>`;
+    }
+  }
 });
-
-window.buildCategoryList = buildCategoryList;
