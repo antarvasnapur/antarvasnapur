@@ -1,7 +1,7 @@
 /* analytics.js — replace GA_MEASUREMENT_ID with your real GA4 ID */
 (function(){
-  const GA_ID = 'GA_MEASUREMENT_ID';
-  if (!GA_ID || GA_ID === 'GA_MEASUREMENT_ID') return;
+  const GA_ID = 'G-1SG6Z7LKPG';
+  if (!GA_ID || GA_ID === 'G-1SG6Z7LKPG') return;
   const s = document.createElement('script');
   s.async = true;
   s.src = 'https://www.googletagmanager.com/gtag/js?id=' + GA_ID;
